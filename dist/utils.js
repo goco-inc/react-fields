@@ -67,7 +67,7 @@ var awaitHash = exports.awaitHash = function () {
 }();
 
 var normalizeSchema = exports.normalizeSchema = function normalizeSchema(schema) {
-  return(
+  return (
     // Only normalize the schema if it exists.
     _lodash2.default.isObject(schema) ?
     // In both cases, the schema is recursively normalized.

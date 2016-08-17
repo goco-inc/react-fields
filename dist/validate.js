@@ -172,7 +172,7 @@ var validateNode = function () {
 }();
 
 var getChildFormError = function getChildFormError(childErrors) {
-  var childFormError = undefined;
+  var childFormError = void 0;
   childErrors = childErrors ? _lodash2.default.mapValues(childErrors, function (error) {
     if (!error) {
       return null;
@@ -206,7 +206,7 @@ var validate = function () {
 
             // Validate nested values
 
-            childErrorAttr = undefined, childErrorHash = undefined;
+            childErrorAttr = void 0, childErrorHash = void 0;
             _context2.t0 = schema.type;
             _context2.next = _context2.t0 === 'object' ? 6 : _context2.t0 === 'array' ? 9 : 12;
             break;

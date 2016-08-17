@@ -153,7 +153,7 @@ class Fields extends React.Component {
     this.checkFieldPath(fieldPath)
 
     const fieldSchema = fieldPath
-      ? _.get(this, _.flatMap(fieldPath, p => ['schema', p]))
+      ? _.get(this.schema, _.flatMap(fieldPath, p => ['schema', p]))
       : this.schema
 
     invariant(

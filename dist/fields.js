@@ -137,7 +137,7 @@ var Fields = function (_React$Component) {
 
       this.checkFieldPath(fieldPath);
 
-      var fieldSchema = fieldPath ? _lodash2.default.get(this, _lodash2.default.flatMap(fieldPath, function (p) {
+      var fieldSchema = fieldPath ? _lodash2.default.get(this.schema, _lodash2.default.flatMap(fieldPath, function (p) {
         return ['schema', p];
       })) : this.schema;
 
@@ -173,6 +173,7 @@ var Fields = function (_React$Component) {
       var fieldSchema = fieldData.fieldSchema;
       var fieldType = fieldData.fieldType;
 
+
       var fieldComponentProps = _extends({}, this.props.fieldComponentProps, fieldSchema.fieldComponentProps, fieldType && fieldType.fieldComponentProps);
 
       return _extends({
@@ -203,6 +204,7 @@ var Fields = function (_React$Component) {
       var fieldType = fieldData.fieldType;
       var fieldPathString = fieldData.fieldPathString;
       var fieldError = fieldData.fieldError;
+
 
       var FieldComponent = fieldComponent || fieldSchema.fieldComponent || fieldType && fieldType.fieldComponent;
 
@@ -237,6 +239,7 @@ var Fields = function (_React$Component) {
  *
  * @param {?Object} baseOptions - base options for `renderFields`
  */
+
 
 Fields.propTypes = {
   /**

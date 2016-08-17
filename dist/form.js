@@ -140,6 +140,7 @@ var Form = function (_React$Component) {
               case 3:
                 value = this.state.value;
 
+
                 this.clearError();
                 this.setState({ isSubmitting: true });
 
@@ -159,7 +160,7 @@ var Form = function (_React$Component) {
                 return _context2.abrupt('return', false);
 
               case 12:
-                res = undefined;
+                res = void 0;
                 _context2.prev = 13;
                 _context2.next = 16;
                 return this.props.submit(value);
