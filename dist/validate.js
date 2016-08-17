@@ -67,7 +67,7 @@ var rules = {
     var value = _ref4.value;
     var maxValue = _ref4.param;
     var title = _ref4.title;
-    return value > maxValue && title + ' must not be more than ' + value;
+    return value > maxValue && title + ' must not be more than ' + maxValue;
   },
   minLength: function minLength(_ref5) {
     var value = _ref5.value;
