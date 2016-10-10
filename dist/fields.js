@@ -4,10 +4,6 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _arguments = arguments;
-
-// Default field components
-
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -43,6 +39,9 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+// Default field components
+
+
 var defaultFieldTypes = {
   string: { fieldComponent: _TextInput2.default },
   number: { fieldComponent: _NumberInput2.default }
@@ -55,12 +54,12 @@ var schemaPropType = _react.PropTypes.oneOfType([_react.PropTypes.shape({
   fieldComponent: _react.PropTypes.func,
   fieldComponentProps: _react.PropTypes.object,
   schema: _react.PropTypes.oneOfType([function () {
-    return schemaPropType.apply(undefined, _arguments);
+    return schemaPropType.apply(undefined, arguments);
   }, _react.PropTypes.objectOf(function () {
-    return schemaPropType.apply(undefined, _arguments);
+    return schemaPropType.apply(undefined, arguments);
   })])
 }), _react.PropTypes.objectOf(function () {
-  return schemaPropType.apply(undefined, _arguments);
+  return schemaPropType.apply(undefined, arguments);
 })]);
 
 var errorMessagePropType = _react.PropTypes.oneOfType([_react.PropTypes.node, _react.PropTypes.string]);
@@ -69,7 +68,7 @@ var errorPropType = _react.PropTypes.shape({
   formError: errorMessagePropType,
   message: errorMessagePropType,
   childErrors: _react.PropTypes.objectOf(function () {
-    return errorPropType.apply(undefined, _arguments);
+    return errorPropType.apply(undefined, arguments);
   })
 });
 

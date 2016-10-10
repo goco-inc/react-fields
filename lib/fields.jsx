@@ -23,11 +23,11 @@ const schemaPropType = PropTypes.oneOfType([
     fieldComponent: PropTypes.func,
     fieldComponentProps: PropTypes.object,
     schema: PropTypes.oneOfType([
-      () => schemaPropType(...arguments),
-      PropTypes.objectOf(() => schemaPropType(...arguments))
+      (...args) => schemaPropType(...args),
+      PropTypes.objectOf((...args) => schemaPropType(...args))
     ])
   }),
-  PropTypes.objectOf(() => schemaPropType(...arguments))
+  PropTypes.objectOf((...args) => schemaPropType(...args))
 ])
 
 const errorMessagePropType = PropTypes.oneOfType([
@@ -38,7 +38,7 @@ const errorMessagePropType = PropTypes.oneOfType([
 const errorPropType = PropTypes.shape({
   formError: errorMessagePropType,
   message: errorMessagePropType,
-  childErrors: PropTypes.objectOf(() => errorPropType(...arguments))
+  childErrors: PropTypes.objectOf((...args) => errorPropType(...args))
 })
 
 class Fields extends React.Component {
