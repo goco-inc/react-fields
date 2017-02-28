@@ -47,21 +47,23 @@ var defaultFieldTypes = {
   number: { fieldComponent: _NumberInput2.default }
 };
 
-var titlePropType = function titlePropType(props) {
-  for (var _len = arguments.length, rest = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
-    rest[_key - 1] = arguments[_key];
-  }
+var titlePropType = function titlePropType(oneOfType, stringType) {
+  return function (props) {
+    for (var _len = arguments.length, rest = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+      rest[_key - 1] = arguments[_key];
+    }
 
-  // This is not the best test, but it's going to have to work for now
-  if (props.rules || props.type) {
-    return _react.PropTypes.string.apply(_react.PropTypes, [props].concat(rest));
-  }
+    // This is not the best test, but it's going to have to work for now
+    if (props.rules || props.type) {
+      return stringType.apply(undefined, [props].concat(rest));
+    }
 
-  return _react.PropTypes.oneOfType([_react.PropTypes.string, _react.PropTypes.object]).apply(undefined, [props].concat(rest));
+    return oneOfType.apply(undefined, [props].concat(rest));
+  };
 };
 
 var schemaPropType = _react.PropTypes.oneOfType([_react.PropTypes.shape({
-  title: titlePropType,
+  title: titlePropType(_react.PropTypes.oneOfType([_react.PropTypes.string, _react.PropTypes.object]), _react.PropTypes.string),
   type: _react.PropTypes.oneOf(['array', 'object', 'string', 'integer', 'date', 'datetime']),
   rules: _react.PropTypes.object,
   fieldComponent: _react.PropTypes.func,

@@ -13,21 +13,21 @@ const defaultFieldTypes = {
   number: { fieldComponent: NumberInput }
 }
 
-const titlePropType = (props, ...rest) => {
+const titlePropType = (oneOfType, stringType) => (props, ...rest) => {
   // This is not the best test, but it's going to have to work for now
   if (props.rules || props.type) {
-    return PropTypes.string(props, ...rest)
+    return stringType(props, ...rest)
   }
 
-  return PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.object,
-  ])(props, ...rest)
+  return oneOfType(props, ...rest)
 }
 
 const schemaPropType = PropTypes.oneOfType([
   PropTypes.shape({
-    title: titlePropType,
+    title: titlePropType(PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.object,
+    ]), PropTypes.string),
     type: PropTypes.oneOf([
       'array', 'object', 'string', 'integer', 'date', 'datetime'
     ]),
