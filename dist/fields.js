@@ -1,13 +1,13 @@
 'use strict';
 
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.renderFields = exports.createFieldRenderer = undefined;
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _lodash = require('lodash');
 
@@ -16,6 +16,10 @@ var _lodash2 = _interopRequireDefault(_lodash);
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
+
+var _propTypes = require('prop-types');
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
 
 var _invariant = require('invariant');
 
@@ -62,27 +66,27 @@ var titlePropType = function titlePropType(oneOfType, stringType) {
   };
 };
 
-var schemaPropType = _react.PropTypes.oneOfType([_react.PropTypes.shape({
-  title: titlePropType(_react.PropTypes.oneOfType([_react.PropTypes.string, _react.PropTypes.object]), _react.PropTypes.string),
-  type: _react.PropTypes.oneOf(['array', 'object', 'string', 'integer', 'date', 'datetime']),
-  rules: _react.PropTypes.object,
-  fieldComponent: _react.PropTypes.func,
-  fieldComponentProps: _react.PropTypes.object,
-  schema: _react.PropTypes.oneOfType([function () {
+var schemaPropType = _propTypes2.default.oneOfType([_propTypes2.default.shape({
+  title: titlePropType(_propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.object]), _propTypes2.default.string),
+  type: _propTypes2.default.oneOf(['array', 'object', 'string', 'integer', 'date', 'datetime']),
+  rules: _propTypes2.default.object,
+  fieldComponent: _propTypes2.default.func,
+  fieldComponentProps: _propTypes2.default.object,
+  schema: _propTypes2.default.oneOfType([function () {
     return schemaPropType.apply(undefined, arguments);
-  }, _react.PropTypes.objectOf(function () {
+  }, _propTypes2.default.objectOf(function () {
     return schemaPropType.apply(undefined, arguments);
   })])
-}), _react.PropTypes.objectOf(function () {
+}), _propTypes2.default.objectOf(function () {
   return schemaPropType.apply(undefined, arguments);
 })]);
 
-var errorMessagePropType = _react.PropTypes.oneOfType([_react.PropTypes.node, _react.PropTypes.string]);
+var errorMessagePropType = _propTypes2.default.oneOfType([_propTypes2.default.node, _propTypes2.default.string]);
 
-var errorPropType = _react.PropTypes.shape({
+var errorPropType = _propTypes2.default.shape({
   formError: errorMessagePropType,
   message: errorMessagePropType,
-  childErrors: _react.PropTypes.objectOf(function () {
+  childErrors: _propTypes2.default.objectOf(function () {
     return errorPropType.apply(undefined, arguments);
   })
 });
@@ -93,7 +97,7 @@ var Fields = function (_React$Component) {
   function Fields(props) {
     _classCallCheck(this, Fields);
 
-    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Fields).apply(this, arguments));
+    var _this = _possibleConstructorReturn(this, (Fields.__proto__ || Object.getPrototypeOf(Fields)).apply(this, arguments));
 
     _this.loadProps(props);
     return _this;
@@ -184,8 +188,8 @@ var Fields = function (_React$Component) {
   }, {
     key: 'getPropsForFieldData',
     value: function getPropsForFieldData(fieldData) {
-      var fieldSchema = fieldData.fieldSchema;
-      var fieldType = fieldData.fieldType;
+      var fieldSchema = fieldData.fieldSchema,
+          fieldType = fieldData.fieldType;
 
 
       var fieldComponentProps = _extends({}, this.props.fieldComponentProps, fieldSchema.fieldComponentProps, fieldType && fieldType.fieldComponentProps);
@@ -214,10 +218,10 @@ var Fields = function (_React$Component) {
     value: function renderField(rawFieldPath, fieldProps, fieldComponent) {
       var fieldData = this.getFieldData(rawFieldPath);
       var props = this.getPropsForFieldData(fieldData);
-      var fieldSchema = fieldData.fieldSchema;
-      var fieldType = fieldData.fieldType;
-      var fieldPathString = fieldData.fieldPathString;
-      var fieldError = fieldData.fieldError;
+      var fieldSchema = fieldData.fieldSchema,
+          fieldType = fieldData.fieldType,
+          fieldPathString = fieldData.fieldPathString,
+          fieldError = fieldData.fieldError;
 
 
       var FieldComponent = fieldComponent || fieldSchema.fieldComponent || fieldType && fieldType.fieldComponent;
@@ -260,15 +264,15 @@ Fields.propTypes = {
    * The field schema
    */
   schema: schemaPropType.isRequired,
-  render: _react.PropTypes.func.isRequired,
+  render: _propTypes2.default.func.isRequired,
   /**
    * The field values
    */
-  value: _react.PropTypes.oneOfType([_react.PropTypes.array, _react.PropTypes.object]).isRequired,
+  value: _propTypes2.default.oneOfType([_propTypes2.default.array, _propTypes2.default.object]).isRequired,
   /**
    * onChange(value, fieldName, fieldValue)
    */
-  onChange: _react.PropTypes.func,
+  onChange: _propTypes2.default.func,
   /**
    * The field error
    */
@@ -276,28 +280,28 @@ Fields.propTypes = {
   /**
    * If true, renders the values without the field component
    */
-  readOnly: _react.PropTypes.bool,
+  readOnly: _propTypes2.default.bool,
   /**
    * If true, shows a label beside each field
    */
-  showLabels: _react.PropTypes.bool,
+  showLabels: _propTypes2.default.bool,
   /**
    * A hash of field type to component. These can be replaced with
    * field-level declarations as well.
    */
-  fieldTypes: _react.PropTypes.objectOf(_react.PropTypes.shape({
-    fieldComponent: _react.PropTypes.func,
-    fieldComponentProps: _react.PropTypes.object
+  fieldTypes: _propTypes2.default.objectOf(_propTypes2.default.shape({
+    fieldComponent: _propTypes2.default.func,
+    fieldComponentProps: _propTypes2.default.object
   })),
   /**
    * An array of fields to display. If this is not specificed, all
    * fields will be displayed.
    */
-  fields: _react.PropTypes.array,
-  renderContext: _react.PropTypes.object,
-  fieldComponentProps: _react.PropTypes.object,
+  fields: _propTypes2.default.array,
+  renderContext: _propTypes2.default.object,
+  fieldComponentProps: _propTypes2.default.object,
 
-  id: _react.PropTypes.string
+  id: _propTypes2.default.string
 };
 Fields.defaultProps = {
   fieldComponents: {},

@@ -1,11 +1,11 @@
 'use strict';
 
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.rules = exports.isEmpty = undefined;
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 var _lodash = require('lodash');
 
@@ -21,7 +21,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { return step("next", value); }, function (err) { return step("throw", err); }); } } return step("next"); }); }; }
+function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
 
 function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
 
@@ -43,48 +43,48 @@ var isEmpty = exports.isEmpty = function isEmpty(value) {
 
 var rules = {
   required: function required(_ref) {
-    var value = _ref.value;
-    var _required = _ref.param;
-    var title = _ref.title;
+    var value = _ref.value,
+        _required = _ref.param,
+        title = _ref.title;
     return _required && isEmpty(value) && getRequiredMessage(title);
   },
   requiredIf: function requiredIf(_ref2) {
-    var props = _objectWithoutProperties(_ref2, []);
+    var props = _objectWithoutProperties(_ref2, []),
+        value = _ref2.value,
+        rootValue = _ref2.rootValue,
+        shouldBeRequired = _ref2.param,
+        title = _ref2.title;
 
-    var value = _ref2.value;
-    var rootValue = _ref2.rootValue;
-    var shouldBeRequired = _ref2.param;
-    var title = _ref2.title;
     return shouldBeRequired(rootValue, props) && isEmpty(value) && getRequiredMessage(title);
   },
   min: function min(_ref3) {
-    var value = _ref3.value;
-    var minValue = _ref3.param;
-    var title = _ref3.title;
+    var value = _ref3.value,
+        minValue = _ref3.param,
+        title = _ref3.title;
     return value < minValue && title + ' must not be less than ' + minValue;
   },
   max: function max(_ref4) {
-    var value = _ref4.value;
-    var maxValue = _ref4.param;
-    var title = _ref4.title;
+    var value = _ref4.value,
+        maxValue = _ref4.param,
+        title = _ref4.title;
     return value > maxValue && title + ' must not be more than ' + maxValue;
   },
   minLength: function minLength(_ref5) {
-    var value = _ref5.value;
-    var minValue = _ref5.param;
-    var title = _ref5.title;
+    var value = _ref5.value,
+        minValue = _ref5.param,
+        title = _ref5.title;
     return value.length < minValue && title + ' must have at least ' + minValue + ' ' + pluralizeLength(minValue, value);
   },
   maxLength: function maxLength(_ref6) {
-    var value = _ref6.value;
-    var maxValue = _ref6.param;
-    var title = _ref6.title;
+    var value = _ref6.value,
+        maxValue = _ref6.param,
+        title = _ref6.title;
     return value.length > maxValue && title + ' must not have more than ' + maxValue + ' ' + pluralizeLength(maxValue, value);
   },
   match: function match(_ref7) {
-    var value = _ref7.value;
-    var pattern = _ref7.param;
-    var title = _ref7.title;
+    var value = _ref7.value,
+        pattern = _ref7.param,
+        title = _ref7.title;
     return !isEmpty(value) && !('' + value).match(pattern) && title + ' does not match pattern ' + pattern;
   },
   custom: function custom(props) {
@@ -99,7 +99,7 @@ var normalizeObject = function normalizeObject(obj) {
 };
 
 var validateNode = function () {
-  var ref = _asyncToGenerator(regeneratorRuntime.mark(function _callee(schema, value, node) {
+  var _ref8 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(schema, value, node) {
     var ruleName, rule, param, ruleOptions, message;
     return regeneratorRuntime.wrap(function _callee$(_context) {
       while (1) {
@@ -163,11 +163,10 @@ var validateNode = function () {
         }
       }
     }, _callee, undefined);
-  })),
-      _this = undefined;
+  }));
 
   return function validateNode(_x, _x2, _x3) {
-    return ref.apply(_this, arguments);
+    return _ref8.apply(this, arguments);
   };
 }();
 
@@ -189,7 +188,7 @@ var getChildFormError = function getChildFormError(childErrors) {
 };
 
 var validate = function () {
-  var ref = _asyncToGenerator(regeneratorRuntime.mark(function _callee2(schema, data, node) {
+  var _ref10 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(schema, data, node) {
     var errorPromise, childErrorAttr, childErrorHash, childErrorsWithFormError, _getChildFormError, childFormError, childErrors, errorResult;
 
     return regeneratorRuntime.wrap(function _callee2$(_context2) {
@@ -247,13 +246,11 @@ var validate = function () {
 
           case 17:
             childErrorsWithFormError = _context2.t1;
-            _getChildFormError = getChildFormError(childErrorsWithFormError);
-            childFormError = _getChildFormError.childFormError;
-            childErrors = _getChildFormError.childErrors;
-            _context2.next = 23;
+            _getChildFormError = getChildFormError(childErrorsWithFormError), childFormError = _getChildFormError.childFormError, childErrors = _getChildFormError.childErrors;
+            _context2.next = 21;
             return errorPromise;
 
-          case 23:
+          case 21:
             errorResult = _context2.sent;
             return _context2.abrupt('return', normalizeObject(_extends({}, childErrors && _defineProperty({}, childErrorAttr, childErrors), errorResult, {
               // Lift the form error if it already exists in
@@ -261,17 +258,16 @@ var validate = function () {
               formError: childFormError || errorResult.formError
             })));
 
-          case 25:
+          case 23:
           case 'end':
             return _context2.stop();
         }
       }
     }, _callee2, undefined);
-  })),
-      _this = undefined;
+  }));
 
   return function validate(_x4, _x5, _x6) {
-    return ref.apply(_this, arguments);
+    return _ref10.apply(this, arguments);
   };
 }();
 

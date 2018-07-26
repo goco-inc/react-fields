@@ -1,17 +1,21 @@
 'use strict';
 
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.renderForm = exports.createFormRenderer = undefined;
 
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
+
+var _propTypes = require('prop-types');
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
 
 var _shallowequal = require('shallowequal');
 
@@ -27,7 +31,7 @@ var _validate2 = _interopRequireDefault(_validate);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { return step("next", value); }, function (err) { return step("throw", err); }); } } return step("next"); }); }; }
+function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -43,7 +47,7 @@ var Form = function (_React$Component) {
 
     _classCallCheck(this, Form);
 
-    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Form).apply(this, arguments));
+    var _this = _possibleConstructorReturn(this, (Form.__proto__ || Object.getPrototypeOf(Form)).apply(this, arguments));
 
     _this.onChange = function (value) {
       _this.setState({ value: value });
@@ -51,7 +55,7 @@ var Form = function (_React$Component) {
         var result = _this.props.onChange(value);
         if (result instanceof Promise) {
           _this.onChangeDeferred = new Promise(function () {
-            var ref = _asyncToGenerator(regeneratorRuntime.mark(function _callee(resolve) {
+            var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(resolve) {
               return regeneratorRuntime.wrap(function _callee$(_context) {
                 while (1) {
                   switch (_context.prev = _context.next) {
@@ -68,11 +72,10 @@ var Form = function (_React$Component) {
                   }
                 }
               }, _callee, _this2);
-            })),
-                _this = _this2;
+            }));
 
             return function (_x) {
-              return ref.apply(_this, arguments);
+              return _ref.apply(this, arguments);
             };
           }());
         }
@@ -123,7 +126,7 @@ var Form = function (_React$Component) {
   }, {
     key: 'submit',
     value: function () {
-      var ref = _asyncToGenerator(regeneratorRuntime.mark(function _callee2(event) {
+      var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(event) {
         var value, error, res;
         return regeneratorRuntime.wrap(function _callee2$(_context2) {
           while (1) {
@@ -200,9 +203,11 @@ var Form = function (_React$Component) {
         }, _callee2, this, [[13, 19]]);
       }));
 
-      return function submit(_x2) {
-        return ref.apply(this, arguments);
-      };
+      function submit(_x2) {
+        return _ref2.apply(this, arguments);
+      }
+
+      return submit;
     }()
   }, {
     key: 'reset',
@@ -256,23 +261,23 @@ var Form = function (_React$Component) {
 }(_react2.default.Component);
 
 Form.propTypes = {
-  value: _react.PropTypes.any,
-  onChange: _react.PropTypes.func,
-  validate: _react.PropTypes.func.isRequired,
-  submit: _react.PropTypes.func.isRequired,
+  value: _propTypes2.default.any,
+  onChange: _propTypes2.default.func,
+  validate: _propTypes2.default.func.isRequired,
+  submit: _propTypes2.default.func.isRequired,
   /**
    * Called only after `submit` returns a falsy value.
    */
-  afterSubmit: _react.PropTypes.func,
+  afterSubmit: _propTypes2.default.func,
   /**
    * All forms have a submit button to trigger submit actions. Since
    * button types and text will change, you can specify a different
    * type of button for the form.
    */
-  showFormError: _react.PropTypes.bool,
-  renderFormError: _react.PropTypes.func,
+  showFormError: _propTypes2.default.bool,
+  renderFormError: _propTypes2.default.func,
 
-  id: _react.PropTypes.string
+  id: _propTypes2.default.string
 };
 Form.defaultProps = {
   validate: _validate2.default,
